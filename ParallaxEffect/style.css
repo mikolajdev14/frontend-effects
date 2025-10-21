@@ -1,0 +1,55 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+
+/* Sekcje hero z efektem parallax */
+.hero {
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero.second {
+  background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470");
+}
+
+.hero h1 {
+  font-size: 3rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+}
+
+/* Sekcja treści */
+.content {
+  height: 60vh;
+  background: #031926;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content h2 {
+  color: #9dbebb;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  color: #f4e9cd;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
