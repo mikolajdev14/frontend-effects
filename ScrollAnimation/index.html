@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fade In on Scroll</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #1a1a40, #2e2e75);
+        color: white;
+        overflow-x: hidden;
+      }
+
+      header {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        background: linear-gradient(90deg, #ff00cc, #00ffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+
+      section {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      section.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 20px;
+        width: 50%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .card h2 {
+        margin-bottom: 10px;
+        color: #00ffff;
+      }
+
+      .card p {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Fade In on Scroll ✨</h1>
+      <p>Efekt, który sprawia, że Twoja strona żyje podczas przewijania 👇</p>
+    </header>
+
+    <section class="fade">
+      <div class="card">
+        <h2>1️⃣ Sekcja</h2>
+        <p>Ten element pojawia się płynnie, gdy przewiniesz w dół.</p>
+      </div>
+    </section>
+
+    <section class="fade">
+      <div class="card">
+        <h2>2️⃣ Sekcja</h2>
+        <p>Dodaj animacje, które ożywiają Twój projekt.</p>
+      </div>
+    </section>
+
+    <section class="fade">
+      <div class="card">
+        <h2>3️⃣ Sekcja</h2>
+        <p>Całość działa w kilku linijkach kodu JavaScript!</p>
+      </div>
+    </section>
+
+    <script>
+      const sections = document.querySelectorAll(".fade");
+
+      const appear = () => {
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            section.classList.add("show");
+          }
+        });
+      };
+
+      window.addEventListener("scroll", appear);
+      appear();
+    </script>
+  </body>
+</html>
