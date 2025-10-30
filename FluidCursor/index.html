@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamiczna Aura Kursora — bez punktu</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0a0a14;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+        font-family: sans-serif;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        cursor: auto; /* Domyślny kursor */
+      }
+
+      h1 {
+        position: relative;
+        z-index: 10;
+        font-size: 2.2rem;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+        max-width: 80vw;
+      }
+
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        pointer-events: none;
+        opacity: 0.65;
+        animation: ripple-grow 1.4s ease-out forwards;
+      }
+
+      @keyframes ripple-grow {
+        to {
+          transform: translate(-50%, -50%) scale(3.5);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let rippleCount = 0;
+      const maxRipples = 50;
+
+      function getRandomColor() {
+        const hue = Math.floor(Math.random() * 360);
+        return `hsl(${hue}, 80%, 65%)`;
+      }
+
+      let lastCall = 0;
+
+      document.body.addEventListener("mousemove", (e) => {
+        const now = Date.now();
+        if (now - lastCall < 60 || rippleCount >= maxRipples) return;
+        lastCall = now;
+
+        const x = e.clientX;
+        const y = e.clientY;
+
+        const ripple = document.createElement("div");
+        ripple.classList.add("ripple");
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        const size = 20 + Math.random() * 40;
+        ripple.style.width = `${size}px`;
+        ripple.style.height = `${size}px`;
+        ripple.style.background = `radial-gradient(circle, ${getRandomColor()}, transparent 70%)`;
+
+        document.body.appendChild(ripple);
+        rippleCount++;
+
+        setTimeout(() => {
+          if (ripple.parentNode) {
+            ripple.remove();
+            rippleCount--;
+          }
+        }, 1400);
+      });
+    </script>
+  </body>
+</html>
